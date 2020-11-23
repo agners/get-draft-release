@@ -21,7 +21,8 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/exec": "^1.0.4",
-    "@actions/github": "^2.2.0"
+    "@actions/github": "^2.2.0",
+    "@octokit/plugin-paginate-rest": "^1.1.2"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.20.4",
