@@ -5,29 +5,24 @@ async function run() {
   try {
     // Get authenticated GitHub client (Ocktokit): https://github.com/actions/toolkit/tree/master/packages/github#usage
     const github = new GitHub(process.env.GITHUB_TOKEN);
+    console.log(`Lets go`);
 
-    // Get owner and repo from context of payload that triggered the action
-    const { owner, repo } = context.repo;
+    let releases = await context.github.paginate(
+      context.github.repos.listReleases.endpoint.merge(
+        context.repo({
+          per_page: 100,
+        })
+      )
+    )
 
-    // Get the tag name from the triggered action
-    const tagName = context.ref;
+    console.log(`Got ${releases.length} releases: ${releases}`);
 
-    // This removes the 'refs/tags' portion of the string, i.e. from 'refs/tags/v1.10.15' to 'v1.10.15'
-    const tag = tagName.replace("refs/tags/", "");
+    const draftRelease = releases.find((r) => r.draft)
 
-    // Get a release from the tag name
-    // API Documentation: https://developer.github.com/v3/repos/releases/#create-a-release
-    // Octokit Documentation: https://octokit.github.io/rest.js/#octokit-routes-repos-create-release
-    const getReleaseResponse = await github.repos.getReleaseByTag({
-      owner,
-      repo,
-      tag
-    });
+    if (draftRelease)
+      console.log(`Draft release: ${draftRelease.tag_name}`);
 
-    // Get the outputs for the created release from the response
-    const {
-      data: { id: releaseId, html_url: htmlUrl, upload_url: uploadUrl, name: name, body: body, draft: draft, prerelease: prerelease }
-    } = getReleaseResponse;
+    console.log(`Got ${draftRelease.length} releases: ${draftRelease}`);
 
     console.log(`Got release info: '${releaseId}', '${htmlUrl}', '${uploadUrl}', '${name}', '${draft}', '${prerelease}', '${body}'`);
 

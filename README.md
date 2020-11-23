@@ -1,4 +1,4 @@
-# GitHub Action - Get a Releases
+# GitHub Action - Get latest draft Releases
 
 This GitHub Action (written in JavaScript) wraps the [GitHub Release API](https://developer.github.com/v3/repos/releases/), specifically the [Get a Release](https://developer.github.com/v3/repos/releases/#create-a-release) endpoint, to allow you to leverage GitHub Actions to get releases.
 
@@ -38,7 +38,7 @@ jobs:
 
       - name: Get release
         id: get_release
-        uses: bruceadams/get-release@v1.2.2
+        uses: agners/get-draft-release@v0.1.0
         env:
           GITHUB_TOKEN: ${{ github.token }}
 

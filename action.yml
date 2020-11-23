@@ -1,5 +1,5 @@
-name: 'Get the upload URL for a release'
-description: 'Get the upload URL for a release for a tag in your repository'
+name: 'Get the upload URL for a draft release'
+description: 'Get the upload URL for a draft release for a tag in your repository'
 author: 'GitHub'
 outputs:
   id:

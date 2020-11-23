@@ -1,7 +1,7 @@
 {
-  "name": "get-release",
-  "version": "1.0.0",
-  "description": "Get github release information",
+  "name": "get-draft-release",
+  "version": "0.1.0",
+  "description": "Get GitHub draft release information",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint 'src/**.js' 'tests/**.js' --fix",
