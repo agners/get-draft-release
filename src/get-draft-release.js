@@ -5,9 +5,15 @@ async function run() {
   try {
     // Get authenticated GitHub client (Ocktokit): https://github.com/actions/toolkit/tree/master/packages/github#usage
     const github = new GitHub(process.env.GITHUB_TOKEN);
+
+    const { owner, repo } = context.repo;
     console.log(`Lets go`);
 
-    let releases = await github.repos.listReleases()
+    let releases = await github.repos.listReleases({
+      owner,
+      repo,
+      tag
+    });
 
     console.log(`Got ${releases.length} releases: ${releases}`);
 
