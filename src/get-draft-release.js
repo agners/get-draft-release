@@ -7,13 +7,7 @@ async function run() {
     const github = new GitHub(process.env.GITHUB_TOKEN);
     console.log(`Lets go`);
 
-    let releases = await context.github.paginate(
-      context.github.repos.listReleases.endpoint.merge(
-        context.repo({
-          per_page: 100,
-        })
-      )
-    )
+    let releases = await context.github.repos.listReleases()
 
     console.log(`Got ${releases.length} releases: ${releases}`);
 
