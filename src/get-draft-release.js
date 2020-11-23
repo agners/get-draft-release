@@ -11,8 +11,7 @@ async function run() {
 
     let releases = await github.repos.listReleases({
       owner,
-      repo,
-      tag
+      repo
     });
 
     console.log(`Got ${releases.length} releases: ${releases}`);
